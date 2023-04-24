@@ -7,7 +7,7 @@ public class ProductCatalog {
 
     private ProductStorage productStorage;
 
-    public ProductCatalog(DbProductStorage productStorage){
+    public ProductCatalog(HashMapProductStorage productStorage){
         this.productStorage = productStorage;
     }
 

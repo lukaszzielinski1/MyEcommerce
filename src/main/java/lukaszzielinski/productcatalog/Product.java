@@ -48,4 +48,6 @@ public class Product {
     public void setOnline(boolean online) {
         this.online = online;
     }
+
+
 }

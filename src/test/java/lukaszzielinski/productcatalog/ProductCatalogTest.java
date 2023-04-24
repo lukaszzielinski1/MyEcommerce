@@ -21,7 +21,7 @@ public class ProductCatalogTest {
     }
 
     private ProductCatalog thereIsProductCatalog() {
-        return new ProductCatalog(new DbProductStorage());
+        return new ProductCatalog(new HashMapProductStorage());
     }
     @Test
     void itAllowsToAddProduct() {
