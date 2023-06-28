@@ -1,31 +1,31 @@
 package lukaszzielinski;
 
-import lukaszzielinski.productcatalog.HashMapProductStorage;
-import lukaszzielinski.productcatalog.ProductCatalog;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-import java.math.BigDecimal;
-
-@SpringBootApplication
 public class Main {
     public static void main(String[] args) {
-        SpringApplication.run(Main.class, args);
-    }
+        List<String> names = Arrays.asList("Jakub", "Michal",
+                "Agnieszka", "Ola", "Kasia");
+        Greeter greeter = new Greeter();
+        greeter.greet("Jakub"); // -> Hello Jakub
 
-    @Bean
-    ProductCatalog createMyProductCatalog(){
-        ProductCatalog productCatalog = new ProductCatalog(new HashMapProductStorage());
-        String product1 = productCatalog.addProduct("My nice ebook","nice");
-        productCatalog.changePrice(product1, BigDecimal.valueOf(10.10));
-        productCatalog.assignImage(product1, "foo/nice/image.jpeg");
-        productCatalog.publishProduct(product1);
+        List<String> ladies = new ArrayList<String>();
+        for (String name : names) {
+            if (name.endsWith("a")) {
+                ladies.add(name);
+            }
+        }
+        for (String ladyName: ladies) {
+            greeter.greet(ladyName);
+        }
+        System.out.println("------------------------------------");
+        names.stream()
+                .filter(name -> name.endsWith("a")) // python way lambda name: name[-1] == "a"
+                .filter(name -> name.startsWith("A"))
+                .map(String::toUpperCase)
+                .forEach(greeter::greet);
 
-        String product2 = productCatalog.addProduct("My nice ebook 2","nice2");
-        productCatalog.changePrice(product2, BigDecimal.valueOf(10.10));
-        productCatalog.assignImage(product2, "foo/nice2/image.jpeg");
-        productCatalog.publishProduct(product2);
-        return productCatalog;
     }
 }
